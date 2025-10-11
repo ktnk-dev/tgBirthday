@@ -19,7 +19,7 @@ class Markup:
     
 
     @staticmethod
-    def calendar(year=None, month=None) -> ReplyKeyboardMarkup:
+    def calendar(month=None, year=None) -> ReplyKeyboardMarkup:
         markup = ReplyKeyboardMarkup(row_width=7, resize_keyboard=True)
         now = datetime.now()
         year = year if year else now.year

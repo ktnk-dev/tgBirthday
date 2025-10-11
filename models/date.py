@@ -1,5 +1,5 @@
 from pydantic import BaseModel
 
-class CDate(BaseModel):
+class Date(BaseModel):
     month: int
     year: int
