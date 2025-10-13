@@ -1,3 +1,4 @@
 git pull
-docker build -t TGBIRTHDAY . 
-docker run --rm -it TGBIRTHDAY
+docker volume create tgbirthday_database
+docker build -t tgbirthday . 
+docker run --rm -it -v tgbirthday_database:/app/users tgbirthday
