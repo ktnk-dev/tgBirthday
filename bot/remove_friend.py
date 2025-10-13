@@ -17,7 +17,7 @@ def _(message: Message):
     
     send(
         user,
-        "Удален",
+        "<b>Удален(а)</b> 💔",
         Markup.main()
     )
     

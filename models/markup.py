@@ -59,6 +59,7 @@ class Markup:
         
         for bd in user.bdays:
             markup.add(bd.name)
+        markup.add("Haзад")
 
         return markup
 
