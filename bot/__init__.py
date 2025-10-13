@@ -3,5 +3,5 @@ from . import (
     default,
     adding_friend,
     remove_friend,
-    send_all_bdS
+    # send_all_bd
 )
