@@ -1,4 +1,5 @@
 import json
+from telebot.types import Message
 from datetime import datetime
 from pydantic import BaseModel
 
@@ -8,24 +9,28 @@ class State(BaseModel):
 
 class Birthday(BaseModel):
     name: str
-    date: str
+    date: datetime = datetime.now()
 
 class User(BaseModel):
     id: int
+    text: str = ''
     state: State = State()
     bdays: list[Birthday] = []
 
 
-def getUser(userid: int):
-    path = f"./users/{userid}.json"
+def getUser(message: Message):
+    path = f"./users/{message.from_user.id}.json" #type: ignore
     
     try:
         with open(path, 'r', encoding='utf-8') as file:
             data = json.load(file)
         
-        return User(**data)
+        out = User(**data)
+        out.text = message.text #type: ignore
+
+        return out
     
-    except: return User(id=userid)
+    except: return User(id=message.from_user.id, text=message.text) #type: ignore
     
 def saveUser(user: User):
     path = f"./users/{user.id}.json"

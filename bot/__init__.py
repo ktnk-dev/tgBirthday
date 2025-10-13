@@ -1,5 +1,7 @@
 from . import (
     start,
     default,
-    adding_friend
+    adding_friend,
+    remove_friend,
+    send_all_bdS
 )

@@ -12,7 +12,8 @@ def welcome_info(message: Message):
     """
 
     
-    user = getUser(message.from_user.id)
+    user = getUser(message)
+    user.state.name = "default"
     saveUser(user)
     
     # Если надо отчистить все данные после /start

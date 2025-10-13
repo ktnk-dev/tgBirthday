@@ -1,4 +1,5 @@
 from telebot.types import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
+from models.user import User
 import calendar
 from datetime import datetime
 
@@ -50,3 +51,15 @@ class Markup:
         )
 
         return markup
+    
+
+    @staticmethod
+    def display_friends(user: User):
+        markup = ReplyKeyboardMarkup(resize_keyboard=True)
+        
+        for bd in user.bdays:
+            markup.add(bd.name)
+
+        return markup
+
+
