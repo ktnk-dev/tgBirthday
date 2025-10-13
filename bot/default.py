@@ -1,3 +1,4 @@
+import calendar
 from telebot.types import Message
 from models.user import getUser, saveUser
 from models.markup import Markup
@@ -42,7 +43,18 @@ def handle_default_state(message: Message):
             ...
             
         case 'За весь год':
-            ...
+            user.bdays.sort(key=lambda bd: bd.date)
+            text_to_send = ''
+            last_saved_month = -1
+            for bd in user.bdays:
+                if bd.date.month != last_saved_month:
+                    text_to_send += calendar.month_name[bd.date.month] + '\n'
+                    last_saved_month = bd.date.month
+                text_to_send += f'<blockquote>{bd.name}: {bd.date.day} число</blockquote>' + '\n'
+            
+            send(
+                user, text_to_send
+            )  
         
             
     saveUser(user)
