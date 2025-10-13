@@ -1,4 +1,5 @@
 import json
+import os
 from telebot.types import Message
 from datetime import datetime
 from pydantic import BaseModel
@@ -31,7 +32,15 @@ def getUser(message: Message):
         return out
     
     except: return User(id=message.from_user.id, text=message.text) #type: ignore
-    
+
+def getAllUsers() -> list[User]: # type: ignore
+    for filenames in os.listdir('./users'):
+        if '.json' not in filenames: continue 
+        with open('./users/'+filenames, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+            yield User(**data) #type: ignore
+
+
 def saveUser(user: User):
     path = f"./users/{user.id}.json"
     with open(path, 'w', encoding='utf-8') as file:
