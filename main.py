@@ -24,5 +24,7 @@ if __name__ == "__main__":
     p2 = Thread(target=loop)
     p1.start()
     p2.start()
-    p1.join()
-    p2.join()
+    try: 
+        while True: 
+            input()
+    except KeyboardInterrupt: exit()
